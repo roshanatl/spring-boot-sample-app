@@ -38,21 +38,6 @@ pipeline {
 
             }
         }
-        stage('Integration tests') {
-            // Run integration test
-            steps {
-                script {
-                    def mvnHome = tool 'Maven 3.5.2'
-                    if (isUnix()) {
-                        // just to trigger the integration test without unit testing
-                        sh "'${mvnHome}/bin/mvn'  verify -Dunit-tests.skip=true"
-                    } else {
-                        bat(/"${mvnHome}\bin\mvn" verify -Dunit-tests.skip=true/)
-                    }
-
-                }
-         }
-        }
         stage('Sonar scan execution') {
             // Run the sonar scan
             steps {
