@@ -15,14 +15,14 @@ pipeline {
             steps {
                 sh 'mvn test' 
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml' 
-                }
-            }
+            //post {
+            //    always {
+            //        junit 'target/surefire-reports/*.xml' 
+            //    }
+          //  }
         }
         stage('build & SonarQube Scan') {
-                withSonarQubeEnv('My SonarQube Server') {
+                steps{
                     sh 'mvn clean package sonar:sonar'
                 } // SonarQube taskId is automatically attached to the pipeline context
             }
